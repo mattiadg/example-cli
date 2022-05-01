@@ -1,10 +1,11 @@
 import argparse
 
 from commands import train, infer
+from models.loader import load_model_args
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser("Example v2")
+    parser = argparse.ArgumentParser("Example v3")
     subparsers = parser.add_subparsers(help="Sub-commands help")
 
     parser_train = subparsers.add_parser("train", help="Train a model")
@@ -38,6 +39,10 @@ if __name__ == "__main__":
         "--batch_size", type=int, help="Batch size during inference"
     )
     parser_infer.set_defaults(func=infer)
+
+    args_, _ = parser.parse_known_args()
+
+    load_model_args(parser_train, args_.model)
 
     args = parser.parse_args()
     args.func(args)

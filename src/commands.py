@@ -1,10 +1,10 @@
-def train(*args, **kwargs):
+def train(args):
     print("Training model with:")
-    print(f"args={args}")
-    print(f"kwargs={kwargs}")
+    for k, v in args.__dict__.items():
+        print(f"{k}={v}")
 
 
-def infer(*args, **kwargs):
+def infer(args):
     print("Inferring with model with:")
-    print(f"args={args}")
-    print(f"kwargs={kwargs}")
+    for k, v in args.__dict__.items():
+        print(f"{k}={v}")
