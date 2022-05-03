@@ -1,11 +1,12 @@
 import argparse
 
 from commands import train, infer
-from models.loader import load_model_args
+import models.lstm
+import models.transformer
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser("Example v3")
+    parser = argparse.ArgumentParser("Example v2")
     subparsers = parser.add_subparsers(help="Sub-commands help")
 
     parser_train = subparsers.add_parser("train", help="Train a model")
@@ -40,10 +41,8 @@ if __name__ == "__main__":
     )
     parser_infer.set_defaults(func=infer)
 
-    args_, _ = parser.parse_known_args()
-    print(parser.parse_known_args())
-
-    load_model_args(parser_train, args_.model)
+    models.lstm.add_arguments(parser)
+    models.transformer.add_arguments(parser)
 
     args = parser.parse_args()
     args.func(args)
